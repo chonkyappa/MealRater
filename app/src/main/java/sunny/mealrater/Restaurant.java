@@ -3,6 +3,7 @@ package sunny.mealrater;
 public class Restaurant {
 
     private int restaurantID;
+    private String name;
     private String streetAddress;
     private String city;
     private String state;
@@ -15,6 +16,12 @@ public class Restaurant {
         return restaurantID;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getName() {
+        return name;
+    }
     public void setRestaurantID(int restaurantID) {
         this.restaurantID = restaurantID;
     }
