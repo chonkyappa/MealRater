@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 
-public class MainActivity extends AppCompatActivity {
+public class MainMenuActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         addRestaurant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddRestaurantActivity.class);
+                Intent intent = new Intent(MainMenuActivity.this, AddRestaurantActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         rateDish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, RateDishActivity.class);
+                Intent intent = new Intent(MainMenuActivity.this, RateDishActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
