@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.HashMap;
+
 public class RateDishActivity extends AppCompatActivity {
 
     Dish currentDish;
@@ -15,11 +17,25 @@ public class RateDishActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rate_dish);
         innitTypeDropdown();
+        innitRestaurantDropdown();
         currentDish = new Dish();
     }
 
     private void innitRestaurantDropdown() {
+        Spinner dropdownRestaurants = findViewById(R.id.spinnerRestaurant);
+        HashMap<Integer, String> restaurants;
 
+        DishDataSource ds = new DishDataSource(RateDishActivity.this);
+        restaurants = ds.selectRestaurants();
+        String[] restaurantList = new String[restaurants.size()];
+        int i = 0;
+        for (String place: restaurants.values()) {
+            restaurantList[i++] = place;
+        }
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(RateDishActivity.this, android.R.layout.simple_spinner_dropdown_item, restaurantList);
+        dropdownRestaurants.setAdapter(adapter);
     }
 
     private void innitTypeDropdown() {
@@ -38,9 +54,6 @@ public class RateDishActivity extends AppCompatActivity {
         dropdownType.setAdapter(adapter);
     }
 
-    private void innitRestaurantDropDown() {
-
-    }
     private void innitTextChange() {
         EditText etDName = findViewById(R.id.editDishName);
         etDName.addTextChangedListener(new TextWatcher() {
