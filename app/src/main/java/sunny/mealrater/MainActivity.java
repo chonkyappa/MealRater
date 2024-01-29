@@ -2,6 +2,7 @@ package sunny.mealrater;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
@@ -11,24 +12,36 @@ public class MainActivity extends AppCompatActivity implements RateMealDialog.Sa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        innitRateMealButton();
+        setContentView(R.layout.activity_main_menu);
+        innitAddRestaurantButton();
+        innitRateDishButton();
     }
 
-    private void innitRateMealButton() {
+    private void innitAddRestaurantButton() {
 
-        Button rateMealButton = findViewById(R.id.buttonRateMeal);
+        Button addRestaurant = findViewById(R.id.buttonAddRestaurant);
 
-        rateMealButton.setOnClickListener(new View.OnClickListener() {
+        addRestaurant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                android.app.FragmentManager fm = getFragmentManager();
-                RateMealDialog rateMealDialog = new RateMealDialog();
-                rateMealDialog.show(fm, "Rate Your Meal");
+                Intent intent = new Intent(MainActivity.this, AddRestaurantActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
     }
 
+    private void innitRateDishButton() {
+        Button rateDish = findViewById(R.id.buttonRateDish);
+        rateDish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, RateDishActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+    }
     public void didFinishRatingMeal(double rating) {
         TextView showRating = findViewById(R.id.textShowRating);
         showRating.setText(String.format("%.1f/5", rating));
