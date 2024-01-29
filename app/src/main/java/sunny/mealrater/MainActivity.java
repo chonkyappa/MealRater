@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 
-public class MainActivity extends AppCompatActivity implements RateMealDialog.SaveRatingListener {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +42,5 @@ public class MainActivity extends AppCompatActivity implements RateMealDialog.Sa
             }
         });
     }
-    public void didFinishRatingMeal(double rating) {
-        TextView showRating = findViewById(R.id.textShowRating);
-        showRating.setText(String.format("%.1f/5", rating));
-    }
+
 }
