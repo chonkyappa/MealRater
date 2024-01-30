@@ -48,6 +48,21 @@ public class RestaurantDataSource  {
         return didSucceed;
     }
 
+    public boolean isDuplicateRestaurant(String restaurantName) {
+        boolean isDuplicate = false;
+
+        String query = "SELECT COUNT(name) FROM restaurant WHERE name = '" + restaurantName + "'";
+
+        try {
+            Cursor cursor = database.rawQuery(query, null);
+            cursor.moveToFirst();
+            isDuplicate = cursor.getInt(0) > 0;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return isDuplicate;
+
+    }
     public int getLastRestaurantID() {
         int lastID;
 

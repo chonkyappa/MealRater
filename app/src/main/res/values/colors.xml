@@ -4,4 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="pink">#ffc0cb</color>
     <color name="main_menu">#f5426f</color>
+    <color name="error">#f01202</color>
+    <color name="success">#06d441</color>
 </resources>

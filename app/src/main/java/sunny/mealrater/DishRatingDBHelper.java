@@ -11,8 +11,8 @@ public class DishRatingDBHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     private static final String CREATE_TABLE_RESTAURANT =
-            "create table restaurant (restaurantID integer primary key autoincrement, " +
-                    "name text not null," +
+            "create table restaurant (restaurantID integer primary key autoincrement," +
+                    "name text," +
                     "streetaddress text," +
                     "city text," +
                     "state text," +

@@ -18,24 +18,51 @@ public class RateDishActivity extends AppCompatActivity {
         setContentView(R.layout.activity_rate_dish);
         innitTypeDropdown();
         innitRestaurantDropdown();
+        innitTextChange();
+        innitSaveRatingButton();
         currentDish = new Dish();
+    }
+
+    private void innitSaveRatingButton() {
+        Button saveRatingButton = findViewById(R.id.buttonSaveRating);
+        TextView displayCompletion = findViewById(R.id.textRatingError);
+        saveRatingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DishDataSource ds = new DishDataSource(RateDishActivity.this);
+                boolean wasSuccessful = false;
+
+                try {
+                    if (!ds.isDuplicateRating(currentDish.getName(), currentDish.getRestaurantID())) {
+                        wasSuccessful = ds.insertRating(currentDish);
+                    }
+                } catch (Exception e) {
+
+                }
+
+                if (wasSuccessful) {
+                    // display success message
+                    displayCompletion.setTextColor(getResources().getColor(R.color.success));
+                    displayCompletion.setText("Success!");
+                    displayCompletion.setVisibility(View.VISIBLE);
+                } else {
+                    // display error message, duplicate dish rating
+                    displayCompletion.setTextColor(getResources().getColor(R.color.error));
+                    displayCompletion.setText("You already rated this dish! Please rate a different one.");
+                    displayCompletion.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 
     private void innitRestaurantDropdown() {
         Spinner dropdownRestaurants = findViewById(R.id.spinnerRestaurant);
-        HashMap<Integer, String> restaurants;
-
         DishDataSource ds = new DishDataSource(RateDishActivity.this);
-        restaurants = ds.selectRestaurants();
-        String[] restaurantList = new String[restaurants.size()];
-        int i = 0;
-        for (String place: restaurants.values()) {
-            restaurantList[i++] = place;
-        }
-
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(RateDishActivity.this, android.R.layout.simple_spinner_dropdown_item, restaurantList);
+        String[] restaurants = ds.selectRestaurants();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(RateDishActivity.this, android.R.layout.simple_spinner_dropdown_item, restaurants);
         dropdownRestaurants.setAdapter(adapter);
+
+
     }
 
     private void innitTypeDropdown() {
@@ -55,18 +82,17 @@ public class RateDishActivity extends AppCompatActivity {
     }
 
     private void innitTextChange() {
+        DishDataSource ds = new DishDataSource(RateDishActivity.this);
         EditText etDName = findViewById(R.id.editDishName);
         etDName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                TextView displayCompletion = findViewById(R.id.textRatingError);
+                displayCompletion.setVisibility(View.INVISIBLE);
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
-
             @Override
             public void afterTextChanged(Editable s) {
                 currentDish.setName(etDName.getText().toString());
@@ -80,20 +106,18 @@ public class RateDishActivity extends AppCompatActivity {
                 currentDish.setType(dropdownType.getItemAtPosition(position).toString());
                 System.out.println(currentDish.getType());
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
 
-        Spinner dropdownRestaurant = findViewById(R.id.spinnerRestaurant);
-        dropdownRestaurant.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        Spinner dropdownRestaurants = findViewById(R.id.spinnerRestaurant);
+        dropdownRestaurants.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                currentDish.setRestaurantID(ds.selectRestaurantID(dropdownRestaurants.getItemAtPosition(position).toString()));
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
