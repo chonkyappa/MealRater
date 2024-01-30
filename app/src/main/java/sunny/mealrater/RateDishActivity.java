@@ -1,5 +1,6 @@
 package sunny.mealrater;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,6 +17,8 @@ public class RateDishActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rate_dish);
+        innitHomeButton();
+        innitRestaurantButton();
         innitTypeDropdown();
         innitRestaurantDropdown();
         innitTextChange();
@@ -23,6 +26,28 @@ public class RateDishActivity extends AppCompatActivity {
         currentDish = new Dish();
     }
 
+    private void innitHomeButton() {
+        ImageButton ibHome = findViewById(R.id.imageButtonHome);
+        ibHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RateDishActivity.this, MainMenuActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+    }
+    private void innitRestaurantButton() {
+        ImageButton ibHome = findViewById(R.id.imageButtonRestaurant);
+        ibHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RateDishActivity.this, AddRestaurantActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+    }
     private void innitSaveRatingButton() {
         Button saveRatingButton = findViewById(R.id.buttonSaveRating);
         TextView displayCompletion = findViewById(R.id.textRatingError);

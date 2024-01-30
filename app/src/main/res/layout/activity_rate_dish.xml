@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:clickable="false">
 
     <TextView
         android:id="@+id/textChooseRestaurant"
@@ -21,10 +22,10 @@
         android:layout_height="26dp"
         android:layout_marginStart="37dp"
         android:layout_marginEnd="41dp"
+        android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textChooseRestaurant"
-        android:spinnerMode="dropdown"/>
+        app:layout_constraintTop_toBottomOf="@+id/textChooseRestaurant" />
 
     <TextView
         android:id="@+id/textDishName"
@@ -61,9 +62,9 @@
         android:layout_width="133dp"
         android:layout_height="41dp"
         android:layout_marginEnd="16dp"
+        android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textDishType"
-        android:spinnerMode="dropdown"/>
+        app:layout_constraintTop_toBottomOf="@+id/textDishType" />
 
     <RatingBar
         android:id="@+id/ratingBar2"
@@ -101,10 +102,50 @@
         android:layout_marginStart="144dp"
         android:layout_marginTop="68dp"
         android:layout_marginEnd="144dp"
+        android:backgroundTint="@color/main_menu"
         android:text="Save Rating"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ratingBar2" />
+
+    <LinearLayout
+        android:layout_width="410dp"
+        android:layout_height="99dp"
+        android:background="@color/main_menu"
+        android:backgroundTint="@color/main_menu"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/imageButtonRestaurant"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/main_menu"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/sunna" />
+
+        <ImageButton
+            android:id="@+id/imageButtonHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/main_menu"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/mainmenu4" />
+
+        <ImageButton
+            android:id="@+id/imageButtonDish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/main_menu"
+            android:clickable="false"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/rate_dish_icon_2" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

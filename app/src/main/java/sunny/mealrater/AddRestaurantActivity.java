@@ -1,5 +1,6 @@
 package sunny.mealrater;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.ColorInt;
@@ -21,10 +22,34 @@ public class AddRestaurantActivity extends AppCompatActivity {
         //addRestaurant.setEnabled(false); implement this later if you have time
         innitTextChange();
         innitAddButton();
-
+        innitHomeButton();
+        innitDishButton();
         currentRestaurant = new Restaurant();
     }
 
+    private void innitHomeButton() {
+        ImageButton ibHome = findViewById(R.id.imageButtonHome);
+        ibHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddRestaurantActivity.this, MainMenuActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void innitDishButton() {
+        ImageButton ibDish = findViewById(R.id.imageButtonDish);
+        ibDish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddRestaurantActivity.this, RateDishActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+    }
     private void innitAddButton() {
         Button buttonAdd = findViewById(R.id.buttonAdd);
         buttonAdd.setOnClickListener(new View.OnClickListener() {
@@ -60,19 +85,6 @@ public class AddRestaurantActivity extends AppCompatActivity {
         });
     }
 
-    private void clearEditText() {
-        EditText etRName = findViewById(R.id.editRName);
-        etRName.setText("");
-        EditText etStreetAddress = findViewById(R.id.editStreetAddress);
-        etStreetAddress.setText("");
-        EditText etCity = findViewById(R.id.editCity);
-        etCity.setText("");
-        EditText etState = findViewById(R.id.editState);
-        etState.setText("");
-        EditText etZipcode = findViewById(R.id.editZipcode);
-        etZipcode.setText("");
-
-    }
     private void innitTextChange() {
         EditText etRName = findViewById(R.id.editRName);
         etRName.addTextChangedListener(new TextWatcher() {

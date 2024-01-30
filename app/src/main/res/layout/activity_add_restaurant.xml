@@ -106,9 +106,49 @@
         android:layout_marginTop="68dp"
         android:layout_marginEnd="132dp"
         android:layout_marginBottom="404dp"
+        android:backgroundTint="@color/main_menu"
         android:text="Add Restaurant"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editCity" />
+
+    <LinearLayout
+        android:layout_width="410dp"
+        android:layout_height="99dp"
+        android:background="@color/main_menu"
+        android:backgroundTint="@color/main_menu"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/imageButtonRestaurant"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/main_menu"
+            android:clickable="false"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/sunna" />
+
+        <ImageButton
+            android:id="@+id/imageButtonHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/main_menu"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/mainmenu4" />
+
+        <ImageButton
+            android:id="@+id/imageButtonDish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/main_menu"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/rate_dish_icon_2" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
