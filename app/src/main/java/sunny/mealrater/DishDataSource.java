@@ -131,18 +131,22 @@ public class DishDataSource {
 
         try {
             String query = "SELECT * FROM dish WHERE restaurantID = " + restaurantID;
+            open();
             Cursor cursor = database.rawQuery(query, null);
 
             cursor.moveToFirst();
 
-            while (cursor.isAfterLast()) {
+            while (!cursor.isAfterLast()) {
                 newReview = new Dish();
-                newReview.setName(cursor.getString(0));
-                newReview.setType(cursor.getString(1));
-                newReview.setRating(Double.valueOf(cursor.getString(2)));
+                newReview.setDishID(cursor.getInt(0));
+                newReview.setName(cursor.getString(1));
+                newReview.setType(cursor.getString(2));
+                newReview.setRating(Double.valueOf(cursor.getString(3)));
+                newReview.setRestaurantID(restaurantID);
                 reviews.add(newReview);
                 cursor.moveToNext();
             }
+            close();
         } catch (Exception e){
             // any exception -> return an empty list and print stack trace
             e.printStackTrace();
