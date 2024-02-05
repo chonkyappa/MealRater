@@ -31,6 +31,11 @@
             android:name=".RateDishActivity"
             android:exported="false">
         </activity>
+
+        <activity
+            android:name=".ReviewListActivity"
+            android:exported="false">
+        </activity>
     </application>
 
 </manifest>

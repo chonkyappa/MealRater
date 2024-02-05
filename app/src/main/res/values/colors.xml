@@ -6,4 +6,12 @@
     <color name="main_menu">#f5426f</color>
     <color name="error">#f01202</color>
     <color name="success">#06d441</color>
+    <color name="delete_toggle">#FF0000</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="button_background">#610C9F</color>
+
+    <color name="review_name">#940B92</color>
+    <color name="review_type">#DA0C81</color>
+    <color name="review_rating">#E95793</color>
 </resources>
