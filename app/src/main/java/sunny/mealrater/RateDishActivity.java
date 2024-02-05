@@ -31,7 +31,7 @@ public class RateDishActivity extends AppCompatActivity {
         ibHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RateDishActivity.this, MainMenuActivity.class);
+                Intent intent = new Intent(RateDishActivity.this, ReviewListActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
@@ -58,22 +58,26 @@ public class RateDishActivity extends AppCompatActivity {
                 boolean wasSuccessful = false;
 
                 try {
-                    if (!ds.isDuplicateRating(currentDish.getName(), currentDish.getRestaurantID())) {
+                    if (!ds.isDuplicateDish(currentDish)) {
                         wasSuccessful = ds.insertRating(currentDish);
+
+                    } else {
+                        // update rating here
+                        wasSuccessful = ds.updateRating(currentDish);
                     }
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 }
 
                 if (wasSuccessful) {
-                    // display success message
+                    // display error msg
                     displayCompletion.setTextColor(getResources().getColor(R.color.success));
-                    displayCompletion.setText("Success!");
+                    displayCompletion.setText("Rating Saved Successfully!");
                     displayCompletion.setVisibility(View.VISIBLE);
+
                 } else {
-                    // display error message, duplicate dish rating
                     displayCompletion.setTextColor(getResources().getColor(R.color.error));
-                    displayCompletion.setText("You already rated this dish! Please rate a different one.");
+                    displayCompletion.setText("Save Failed.");
                     displayCompletion.setVisibility(View.VISIBLE);
                 }
             }

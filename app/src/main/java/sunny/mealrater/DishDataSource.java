@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DishDataSource {
@@ -85,12 +86,36 @@ public class DishDataSource {
         return didSucceed;
     }
 
-    public boolean isDuplicateRating(String dishName, int restaurantID) {
+    public boolean updateRating(Dish updatedDish) {
+        boolean updateSuccessful = false;
+
+        try {
+            int rowID = updatedDish.getDishID();
+            ContentValues updatedValues = new ContentValues();
+            open();
+            //String query = "UPDATE dish SET rating = " + updatedDish.getRating() + " WHERE dishID = " + updatedDish.getRestaurantID();
+            //Cursor cursor = database.rawQuery(query, null);
+
+            //updateSuccessful = cursor.getCount() > 0;
+            updatedValues.put("name", updatedDish.getName());
+            updatedValues.put("type", updatedDish.getType());
+            updatedValues.put("rating", updatedDish.getRating());
+            updatedValues.put("restaurantID", updatedDish.getRestaurantID());
+            updateSuccessful = database.update("dish", updatedValues, "dishID =" + rowID, null) > 0;
+            close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return updateSuccessful;
+    }
+
+    public boolean isDuplicateDish(Dish dish) {
         boolean isDuplicate = false;
 
         try {
             open();
-            String query = "SELECT * FROM dish WHERE name = '" + dishName + "' AND restaurantID = '" + restaurantID + "'";
+            String query = "SELECT * FROM dish WHERE name = '" + dish.getName() + "' AND restaurantID = " + dish.getRestaurantID();
             Cursor cursor = database.rawQuery(query, null);
             isDuplicate = cursor.getCount() > 0;
             close();
@@ -99,5 +124,31 @@ public class DishDataSource {
         }
 
         return isDuplicate;
+    }
+    public ArrayList<Dish> getReviews(int restaurantID) {
+        ArrayList<Dish> reviews = new ArrayList<Dish>();
+        Dish newReview;
+
+        try {
+            String query = "SELECT * FROM dish WHERE restaurantID = " + restaurantID;
+            Cursor cursor = database.rawQuery(query, null);
+
+            cursor.moveToFirst();
+
+            while (cursor.isAfterLast()) {
+                newReview = new Dish();
+                newReview.setName(cursor.getString(0));
+                newReview.setType(cursor.getString(1));
+                newReview.setRating(Double.valueOf(cursor.getString(2)));
+                reviews.add(newReview);
+                cursor.moveToNext();
+            }
+        } catch (Exception e){
+            // any exception -> return an empty list and print stack trace
+            e.printStackTrace();
+            reviews = new ArrayList<Dish>();
+        }
+
+        return reviews;
     }
 }

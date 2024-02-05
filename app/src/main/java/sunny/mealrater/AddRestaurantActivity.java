@@ -32,7 +32,7 @@ public class AddRestaurantActivity extends AppCompatActivity {
         ibHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddRestaurantActivity.this, MainMenuActivity.class);
+                Intent intent = new Intent(AddRestaurantActivity.this, ReviewListActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }

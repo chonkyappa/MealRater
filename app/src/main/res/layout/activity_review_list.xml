@@ -34,7 +34,7 @@
             android:layout_weight="1"
             android:backgroundTint="@color/main_menu"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/mainmenu4" />
+            app:srcCompat="@drawable/list_icon" />
 
         <ImageButton
             android:id="@+id/imageButtonDish"

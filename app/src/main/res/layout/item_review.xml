@@ -51,6 +51,7 @@
         android:background="@color/transparent"
         android:text="Delete"
         android:textColor="@color/delete_toggle"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
