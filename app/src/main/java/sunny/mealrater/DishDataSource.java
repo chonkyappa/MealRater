@@ -97,6 +97,7 @@ public class DishDataSource {
             //Cursor cursor = database.rawQuery(query, null);
 
             //updateSuccessful = cursor.getCount() > 0;
+            updatedValues.put("dishID", updatedDish.getDishID());
             updatedValues.put("name", updatedDish.getName());
             updatedValues.put("type", updatedDish.getType());
             updatedValues.put("rating", updatedDish.getRating());
@@ -156,12 +157,12 @@ public class DishDataSource {
         return reviews;
     }
 
-    public Dish getSpecificDish(int dishID) {
+    public Dish getSpecificDish(int dishID, int restaurantID) {
         Dish specificDish = new Dish();
 
         try {
             open();
-            String query = "SELECT * FROM dish WHERE dishID = " + dishID;
+            String query = "SELECT * FROM dish WHERE dishID = " + dishID + " AND restaurantID = " + restaurantID;
             Cursor cursor = database.rawQuery(query, null);
 
             cursor.moveToFirst();

@@ -26,7 +26,7 @@ public class RateDishActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            innitDishReview(extras.getInt("dishID"));
+            innitDishReview(extras.getInt("dishID"), extras.getInt("restaurantID"));
             setForEditing(false);
         } else {
             currentDish = new Dish();
@@ -183,7 +183,7 @@ public class RateDishActivity extends AppCompatActivity {
 
     }
 
-    private void innitDishReview(int dishID) {
+    private void innitDishReview(int dishID, int restaurantID) {
         TextView displayRestaurant = findViewById(R.id.textDisplayRestaurant);
         TextView displayType = findViewById(R.id.textDisplayType);
         Spinner restaurantDropDown = findViewById(R.id.spinnerRestaurant);
@@ -193,7 +193,7 @@ public class RateDishActivity extends AppCompatActivity {
 
         DishDataSource ds = new DishDataSource(RateDishActivity.this);
 
-        currentDish = ds.getSpecificDish(dishID);
+        currentDish = ds.getSpecificDish(dishID, restaurantID);
 
         displayRestaurant.setText(ds.getSpecificRestaurant(currentDish.getRestaurantID()));
         displayType.setText(currentDish.getType());

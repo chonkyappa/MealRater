@@ -28,8 +28,10 @@ public class ReviewListActivity extends AppCompatActivity {
             RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) v.getTag();
             int position = viewHolder.getAdapterPosition();
             int dishID = allReviews.get(position).getDishID();
+            int restaurantID = allReviews.get(position).getRestaurantID();
             Intent intent = new Intent(ReviewListActivity.this, RateDishActivity.class);
             intent.putExtra("dishID", dishID);
+            intent.putExtra("restaurantID", restaurantID);
             startActivity(intent);
         }
     };
@@ -60,7 +62,6 @@ public class ReviewListActivity extends AppCompatActivity {
                 rvReviews.setLayoutManager(layoutManager);
                 reviewsAdapter = new ReviewsAdapter(allReviews, this);
                 reviewsAdapter.setOnItemClickListener(onItemClickListener);
-                //reviewsAdapter.setOnItemSelectedListener(onItemSelectedListener);
                 rvReviews.setAdapter(reviewsAdapter);
             } else {
                 Intent intent = new Intent(ReviewListActivity.this, MainMenuActivity.class);
