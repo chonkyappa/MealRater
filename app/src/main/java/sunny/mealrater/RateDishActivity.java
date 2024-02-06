@@ -23,7 +23,16 @@ public class RateDishActivity extends AppCompatActivity {
         innitRestaurantDropdown();
         innitTextChange();
         innitSaveRatingButton();
-        currentDish = new Dish();
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            innitDishReview(extras.getInt("dishID"));
+            setForEditing(false);
+        } else {
+            currentDish = new Dish();
+        }
+
+
     }
 
     private void innitHomeButton() {
@@ -82,6 +91,17 @@ public class RateDishActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void setForEditing(boolean b) {
+        Spinner restaurantDropdown = findViewById(R.id.spinnerRestaurant);
+        Spinner dishTypeDropdown = findViewById(R.id.spinnerDishType);
+        EditText editName = findViewById(R.id.editDishName);
+
+        restaurantDropdown.setEnabled(b);
+        dishTypeDropdown.setEnabled(b);
+        editName.setEnabled(b);
+
     }
 
     private void innitRestaurantDropdown() {
@@ -162,4 +182,30 @@ public class RateDishActivity extends AppCompatActivity {
         });
 
     }
+
+    private void innitDishReview(int dishID) {
+        TextView displayRestaurant = findViewById(R.id.textDisplayRestaurant);
+        TextView displayType = findViewById(R.id.textDisplayType);
+        Spinner restaurantDropDown = findViewById(R.id.spinnerRestaurant);
+        Spinner typeDropDown = findViewById(R.id.spinnerDishType);
+        EditText editDishName = findViewById(R.id.editDishName);
+        RatingBar rbDish = findViewById(R.id.ratingBar2);
+
+        DishDataSource ds = new DishDataSource(RateDishActivity.this);
+
+        currentDish = ds.getSpecificDish(dishID);
+
+        displayRestaurant.setText(ds.getSpecificRestaurant(currentDish.getRestaurantID()));
+        displayType.setText(currentDish.getType());
+        displayRestaurant.setVisibility(View.VISIBLE);
+        displayType.setVisibility(View.VISIBLE);
+
+        editDishName.setText(currentDish.getName());
+        rbDish.setRating(Float.valueOf(currentDish.getRating()));
+
+        restaurantDropDown.setVisibility(View.INVISIBLE);
+        typeDropDown.setVisibility(View.INVISIBLE);
+
+    }
 }
+

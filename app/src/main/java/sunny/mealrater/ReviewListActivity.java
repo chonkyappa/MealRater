@@ -34,30 +34,6 @@ public class ReviewListActivity extends AppCompatActivity {
         }
     };
 
-    /*
-    private AdapterView.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-            DishDataSource ds = new DishDataSource(ReviewListActivity.this);
-
-            try {
-                ds.open();
-                allReviews = ds.getReviews(ds.selectRestaurantID(selectedRestaurant));
-                ds.close();
-                reviewsAdapter = new ReviewsAdapter(allReviews, ReviewListActivity.this);
-                reviewsAdapter.notifyDataSetChanged();
-            } catch (Exception e) {
-
-            }
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-
-        }
-    };
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

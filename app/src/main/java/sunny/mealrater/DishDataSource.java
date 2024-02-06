@@ -155,4 +155,49 @@ public class DishDataSource {
 
         return reviews;
     }
+
+    public Dish getSpecificDish(int dishID) {
+        Dish specificDish = new Dish();
+
+        try {
+            open();
+            String query = "SELECT * FROM dish WHERE dishID = " + dishID;
+            Cursor cursor = database.rawQuery(query, null);
+
+            cursor.moveToFirst();
+
+            specificDish.setDishID(cursor.getInt(0));
+            specificDish.setName(cursor.getString(1));
+            specificDish.setType(cursor.getString(2));
+            specificDish.setRating(Double.parseDouble(cursor.getString(3)));
+            specificDish.setRestaurantID(cursor.getInt(4));
+
+            close();
+        } catch (Exception e) {
+            specificDish = new Dish(); // any error, just return an empty review
+            e.printStackTrace();
+        }
+
+        return specificDish;
+    }
+
+    public String getSpecificRestaurant(int restaurantID) {
+        String specificRestaurant;
+
+        try {
+            open();
+            String query = "SELECT name FROM restaurant WHERE restaurantID = " + restaurantID;
+            Cursor cursor = database.rawQuery(query, null);
+
+            cursor.moveToFirst();
+
+            specificRestaurant = cursor.getString(0);
+            close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            specificRestaurant = "None";
+        }
+
+        return specificRestaurant;
+    }
 }

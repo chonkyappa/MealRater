@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="37dp"
         android:layout_marginTop="198dp"
-        android:text="Choose Restaurant:"
+        android:text="Restaurant:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="41dp"
         android:layout_marginEnd="88dp"
-        android:text="Dish Type"
+        android:text="Dish Type:"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerRestaurant" />
 
@@ -147,5 +147,29 @@
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/rate_dish_icon_2" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textDisplayRestaurant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textSize="@dimen/text_size_medium"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textChooseRestaurant" />
+
+    <TextView
+        android:id="@+id/textDisplayType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="72dp"
+        android:text="TextView"
+        android:textSize="@dimen/text_size_medium"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textDishType" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
