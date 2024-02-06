@@ -201,4 +201,19 @@ public class DishDataSource {
 
         return specificRestaurant;
     }
+
+    public boolean deleteReview(int dishID) {
+        boolean deleteSuccessful = false;
+
+        try {
+            open();
+            deleteSuccessful = database.delete("dish", "dishID = " + dishID, null) > 0;
+            close();
+        } catch (Exception e) {
+            // do nothing since delete successful is already false
+            e.printStackTrace();
+        }
+
+        return deleteSuccessful;
+    }
 }

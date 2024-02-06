@@ -6,9 +6,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -44,7 +47,7 @@ public class ReviewListActivity extends AppCompatActivity {
         innitRestaurantButton();
         innitAddReviewButton();
         innitRestaurantDropdown();
-        innitDropdownListener();
+        innitDeleteSwitch();
 
     }
 
@@ -63,6 +66,7 @@ public class ReviewListActivity extends AppCompatActivity {
                 reviewsAdapter = new ReviewsAdapter(allReviews, this);
                 reviewsAdapter.setOnItemClickListener(onItemClickListener);
                 rvReviews.setAdapter(reviewsAdapter);
+                innitDropdownListener();
             } else {
                 Intent intent = new Intent(ReviewListActivity.this, MainMenuActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -136,5 +140,15 @@ public class ReviewListActivity extends AppCompatActivity {
         });
     }
 
+    private void innitDeleteSwitch() {
+        Switch deleteReviewSwitch = findViewById(R.id.switchDelete);
+        deleteReviewSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                reviewsAdapter.setDeleting(isChecked);
+                reviewsAdapter.notifyDataSetChanged();
+            }
+        });
+    }
 
 }
