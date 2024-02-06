@@ -84,6 +84,7 @@ public class ReviewListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ReviewListActivity.this, RateDishActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("selectedRestaurant", selectedRestaurant);
                 startActivity(intent);
             }
         });
@@ -108,6 +109,7 @@ public class ReviewListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ReviewListActivity.this, RateDishActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("selectedRestaurant", selectedRestaurant);
                 startActivity(intent);
             }
         });

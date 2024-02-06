@@ -7,12 +7,15 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
+import java.util.Arrays;
 
 import java.util.HashMap;
 
 public class RateDishActivity extends AppCompatActivity {
 
     Dish currentDish;
+
+    String extraSelectedRestaurant;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,19 +23,26 @@ public class RateDishActivity extends AppCompatActivity {
         innitHomeButton();
         innitRestaurantButton();
         innitTypeDropdown();
-        innitRestaurantDropdown();
-        innitTextChange();
+
+
         innitSaveRatingButton();
 
         Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            innitDishReview(extras.getInt("dishID"), extras.getInt("restaurantID"));
-            setForEditing(false);
+        if (extras != null) { // method checks if the bundle contains dishID key/value pair
+            if (extras.containsKey("dishID")) {
+                innitDishReview(extras.getInt("dishID"), extras.getInt("restaurantID"));
+                extraSelectedRestaurant = extras.getString("selectedRestaurant");
+                setForEditing(false);
+            } else if (extras.containsKey("selectedRestaurant")){
+                extraSelectedRestaurant = extras.getString("selectedRestaurant");
+                currentDish = new Dish();
+            }
         } else {
             currentDish = new Dish();
         }
 
-
+        innitRestaurantDropdown();
+        innitTextChange();
     }
 
     private void innitHomeButton() {
@@ -108,6 +118,12 @@ public class RateDishActivity extends AppCompatActivity {
         Spinner dropdownRestaurants = findViewById(R.id.spinnerRestaurant);
         DishDataSource ds = new DishDataSource(RateDishActivity.this);
         String[] restaurants = ds.selectRestaurants();
+        Arrays.sort(restaurants);
+        if (extraSelectedRestaurant != null) {
+            String temp = restaurants[0];
+            restaurants[0] = extraSelectedRestaurant;
+            restaurants[Arrays.binarySearch(restaurants, extraSelectedRestaurant)] = temp;
+        }
         ArrayAdapter<String> adapter = new ArrayAdapter<>(RateDishActivity.this, android.R.layout.simple_spinner_dropdown_item, restaurants);
         dropdownRestaurants.setAdapter(adapter);
 
